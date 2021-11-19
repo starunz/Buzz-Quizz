@@ -41,7 +41,7 @@
 .create-quiz {
     width: 100%;
     max-width: 600px;
-    margin: 71px auto 20px;
+    margin: 70px auto 20px;
     display: flex;
     flex-direction: column;
 }
@@ -111,4 +111,13 @@
 
     border: none;
     cursor: pointer;
+}
+
+.next:hover {
+    filter: brightness(0.9);
+}
+
+.next:active {
+    transform: scale(0.90);
+    transition: 1s;
 }
