@@ -33,11 +33,31 @@ function saveValuesBasicQuizzInformation() {
     const image = document.querySelector(".creating .url").value;
     const numberQuestions = document.querySelector(".creating .number-questions").value;
     const numberLevels = document.querySelector(".creating .number-levels").value;
+
+    quizzInfo.title = title;
+    quizzInfo.image = image;
+    quizzInfo.numberQuestions = parseInt(numberQuestions);
+    quizzInfo.numberLevels = parseInt(numberLevels);
 }
 
 function validateOfBasicQuizzInfo() {
     // aqui ficará as validações 
     // antes disso preciso salvar o valor dos inputs
+
+    saveValuesBasicQuizzInformation();
+
+    if (quizzInfo.title.length < 20 || quizzInfo.title.length > 65) {
+        return false;
+    } else if (!checkURL(quizzInfo.image)) {
+        return false;
+    } else if (quizzInfo.numberQuestions < 1) {
+        return false;
+    } else if (quizzInfo.numberLevels < 1) {
+        return false;
+    }
+    
+    console.log(quizzInfo)
+    return true;
 }
 
 function createQuizzQuestions() {
