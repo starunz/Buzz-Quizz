@@ -18,7 +18,7 @@ function basicQuizzInformation() {
     <div class="create-quiz">
         <div class="title">Comece pelo começo</div>
         <div class="creating">
-            <input type="text" class="title" placeholder="Título do seu quizz">
+            <input type="text" class="title-quizz" placeholder="Título do seu quizz">
             <input type="text" class="url" placeholder="URL da imagem do seu quizz">
             <input type="number" class="number-questions" placeholder="Quantidade de perguntas do quizz">
             <input type="number" class="number-levels" placeholder="Quantidade de níveis do quizz">
@@ -29,10 +29,10 @@ function basicQuizzInformation() {
 }
 
 function saveValuesBasicQuizzInformation() {
-    const title = document.querySelector(".creating .title").value;
-    const image = document.querySelector(".creating .url").value;
-    const numberQuestions = document.querySelector(".creating .number-questions").value;
-    const numberLevels = document.querySelector(".creating .number-levels").value;
+    const title = document.querySelector(".title-quizz").value;
+    const image = document.querySelector(".url").value;
+    const numberQuestions = document.querySelector(".number-questions").value;
+    const numberLevels = document.querySelector(".number-levels").value;
 
     quizzInfo.title = title;
     quizzInfo.image = image;
@@ -50,18 +50,27 @@ function validateOfBasicQuizzInfo() {
         return false;
     } else if (!checkURL(quizzInfo.image)) {
         return false;
-    } else if (quizzInfo.numberQuestions < 1) {
+    } else if (quizzInfo.numberQuestions < 3) {
         return false;
-    } else if (quizzInfo.numberLevels < 1) {
+    } else if (quizzInfo.numberLevels < 2) {
         return false;
     }
-    
-    console.log(quizzInfo)
     return true;
 }
 
 function createQuizzQuestions() {
+    const validate = validateOfBasicQuizzInfo();
+    if (!validate) {
+      alert('Preencha os campos corretamente para prosseguir, por favor 🙂');
+    }
     // aqui vai ficar a função que criará a tela 3.2 
     // mas pra chamar ela preciso validar a tela 3.1
 
 }
+
+function checkURL (url) {
+    const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
+    return regexUrl.test(url);
+}
+
+basicQuizzInformation();
