@@ -2,6 +2,133 @@ const URL = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da u
 const Container = document.querySelector('.container'); //para facilitar a vida, a gente pode usar 1 unica main para todas telas
 //já que vamos criar dinâmicamente, economiza css, html e tempo de ficar procurando :v mas cuidado nos fechamentos das divs :v
 
+// ------ tela 02 ------ 
+callScreen2(2);
+const questionQuiz = document.querySelector('.selectQuiz');
+let answersCorret = 0;
+let dataQuiz;
+let numberOfResponses = 0;
+let data;
+
+function callScreen2(idQuizz){
+    const promise = axios.get(URL+"/quizzes/"+idQuizz);
+    promise.then(loadQuizz);
+    promise.catch(handleError);
+}
+
+
+function loadQuizz(answer){
+    data = answer;
+    const quizzSelect = answer.data;
+    dataQuiz = quizzSelect   
+    questionQuiz.innerHTML = `
+        <div class="titleQuizz">
+            <img src= ${quizzSelect.image}>
+            <div class=opacity>${quizzSelect.title}</div>
+        </div>`;
+    quizzSelect.questions.forEach(sortAnswer);
+}
+
+
+function sortAnswer(item){
+    let answers = item.answers; //array com as respostas "cada resposta é um obejeto"
+    answers.sort(() => Math.random() - 0.5);
+    let html= `
+    <div class="questionQuiz">
+        <div class="titleQuestion" style="background-color: ${item.color}">
+            <span>${item.title}</span>
+        </div>
+        <div class="answers" >
+        `;
+    answers.forEach(loadAnswers)
+    html+=`
+        </div>
+    </div>`
+    questionQuiz.innerHTML += html;
+    function loadAnswers(answerOption){
+        html += `
+                <div class="answerOption">
+                    <img src=${answerOption.image} onclick="selectAnswer(this,${answerOption.isCorrectAnswer})">
+                    <span onclick="selectAnswer(this)">${answerOption.text}</span>
+                </div>`;
+    }
+}
+
+
+function selectAnswer(answer, isCorrectAnswer){
+    const select = answer.parentNode;
+    const parent = select.parentNode;
+    const questionAtual = (parent.parentNode).parentNode;
+    console.log(questionAtual)
+
+    if(parent.children[1].style.opacity <="0.1"){
+        numberOfResponses++;
+        if(isCorrectAnswer == true){
+             select.children[1].style.color =  '#009C22';
+             answersCorret++;
+        }else{
+            select.children[1].style.color =  '#FF4B4B';
+        }
+        for(let i=0; i<parent.children.length;i++){
+            if(parent.children[i]!==select){
+                parent.children[i].style.opacity = "0.5"
+            }
+        }
+        if((numberOfResponses+1) < questionAtual.children.length){
+            setTimeout(() => { questionAtual.children[numberOfResponses+1].scrollIntoView();},2000);
+        }else{
+            endQuiz();
+        }
+    }
+}
+
+function calcPorcent(){
+    let porcent = Math.ceil((answersCorret*100)/(dataQuiz.questions.length));
+    for(let i=dataQuiz.levels.length-1;i=>0;i--){
+        if(porcent >= dataQuiz.levels[i].minValue){
+            return [dataQuiz.levels[i], porcent];
+        }
+    }                      
+}
+
+function endQuiz(){
+    const values = calcPorcent();
+    const end = values[0];
+    const porcent = values[1];
+    const title= porcent + "% de acerto: "+ end.title;
+    questionQuiz.innerHTML +=`
+        <div class=endQuiz>
+            <div class="titleEndQuiz" >
+                <span>${title}</span>
+            </div>
+            <div class="feedback">
+                <img src=${end.image}>
+                <div class="text" >${end.text}</div>
+            </div>
+        </div>`
+    const feedback = document.querySelector('.endQuiz');
+    setTimeout(() => { feedback.scrollIntoView();},2000);
+    setTimeout(() => { postQuizNavigation();},2000);
+}
+function postQuizNavigation(){
+    questionQuiz.innerHTML +=`
+        <button class="restart" onclick="restart()">Reiniciar Quiz</button>
+        <div class="home" onclick="home()">Voltar pra home</div>
+    `
+}
+function restart(){
+    answersCorret = 0;
+    numberOfResponses = 0;
+    const init = document.querySelector('.titleQuizz');
+    init.scrollIntoView();
+    loadQuizz(data);   
+}
+function home(){
+
+}
+function handleError(erro){
+    console.log(erro)
+}
 
 // ------ tela 03 ------ 
 
@@ -72,5 +199,3 @@ function checkURL (url) {
     const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     return regexUrl.test(url);
 }
-
-basicQuizzInformation();
