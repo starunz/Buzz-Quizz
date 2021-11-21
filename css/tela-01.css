@@ -157,9 +157,11 @@ img {
     border-radius: 5px;
     z-index: -1;
  }
-.quizz-header {
+.quizz-server {
     position: relative;
     word-break: break-all;
+    cursor: pointer;
+    
 
 }
 .quizz-title {
@@ -191,3 +193,7 @@ img {
     );
     border-radius: 5px;
 }
+.hide {
+    display: none;
+  }
+  

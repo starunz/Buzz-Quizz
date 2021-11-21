@@ -6,7 +6,7 @@ function sucess(response){
 
        for (let i = 0; i < quizzes.length; i++){
             ulQuizzes.innerHTML += ` <li>
-            <div class="quizz-header">
+            <div class="quizz-server" onclick="showScreenTwo()" >
             
               <strong class="quizz-title">${quizzes[i].title}</strong>
               <div class="quizz-question">
@@ -22,6 +22,11 @@ const promess = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizz
 
 promess.then(sucess);
 
+
+function showScreenTwo(){
+    const screenOne = document.querySelector(".tela-01");
+    screenOne.classList.add("hide");
+}
 
 /*
 
