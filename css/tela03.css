@@ -124,6 +124,7 @@
 
 .create-quiz .container-questions.creating {
     padding: 5px 15px;
+    margin-bottom: 10px;
 }
 
 .create-quiz .title-card-question {

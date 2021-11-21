@@ -11,7 +11,8 @@ function basicQuizzInformation() {
         title: '',
         image: '',
         numberQuestions: 0,
-        numberLevels: 0
+        numberLevels: 0,
+        questions: []
     }
 
     Container.innerHTML = `
@@ -64,12 +65,23 @@ function createQuizzQuestions() {
     if (!validate) {
       alert('Preencha os campos corretamente para prosseguir, por favor 🙂');
     }
-    // aqui vai ficar a função que criará a tela 3.2 
+    
+    let questions = ''; 
+    for(let i = 0 ; i < quizzInfo.numberQuestions; i++){
+        questions += createCardQuizzQuestions(i);
+    }
 
     Container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
+        ${questions}
+        <button class="next" onclick="">Prosseguir para criar níveis</button>
+    </div>
+    `
+}
 
+function createCardQuizzQuestions() {
+    return `
         <div class="container-questions creating">
             <div class="title-card-question">
             <div class="subtitle">Pergunta</div>
@@ -77,7 +89,7 @@ function createQuizzQuestions() {
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
             </div>
-    
+
             <div class="questions">
                 <input type="text" class="answer-texto" placeholder="Texto da pergunta" />
                 <input type="text" class="answer-cor" placeholder="Cor de fundo da pergunta" />
@@ -107,10 +119,7 @@ function createQuizzQuestions() {
                 </div>
             </div>
         </div>
-        <button class="next" onclick="">Prosseguir para criar níveis</button>
-    </div>
     `
-
 }
 
 function checkUrl (url) {
