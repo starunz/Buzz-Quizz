@@ -1,4 +1,4 @@
-const URL = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da url é sempre a mesma o que muda é a rota.
+const Url = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da url é sempre a mesma o que muda é a rota.
 const Container = document.querySelector('.container'); //para facilitar a vida, a gente pode usar 1 unica main para todas telas
 //já que vamos criar dinâmicamente, economiza css, html e tempo de ficar procurando :v mas cuidado nos fechamentos das divs :v
 
@@ -47,8 +47,9 @@ function validateOfBasicQuizzInfo() {
     saveValuesBasicQuizzInformation();
 
     if (quizzInfo.title.length < 20 || quizzInfo.title.length > 65) {
+
         return false;
-    } else if (!checkURL(quizzInfo.image)) {
+    } else if (!checkUrl(quizzInfo.image)) {
         return false;
     } else if (quizzInfo.numberQuestions < 3) {
         return false;
@@ -64,11 +65,55 @@ function createQuizzQuestions() {
       alert('Preencha os campos corretamente para prosseguir, por favor 🙂');
     }
     // aqui vai ficar a função que criará a tela 3.2 
-    // mas pra chamar ela preciso validar a tela 3.1
+
+    Container.innerHTML = `
+    <div class="create-quiz">
+        <div class="title">Crie suas perguntas</div>
+
+        <div class="container-questions creating">
+            <div class="title-card-question">
+            <div class="subtitle">Pergunta</div>
+                <div class="expand" onclick="">
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+            </div>
+    
+            <div class="questions">
+                <input type="text" class="answer-texto" placeholder="Texto da pergunta" />
+                <input type="text" class="answer-cor" placeholder="Cor de fundo da pergunta" />
+
+                <div class="subtitle">Resposta correta</div>
+
+                <div class="answers">
+                    <input type="text" class="answer-correct" placeholder="Resposta correta" />
+                    <input type="text" class="answer-correct-url" placeholder="URL da imagem" />
+                </div>
+
+                <div class="subtitle">Respostas incorretas</div>
+
+                <div class="answers answer-incorrect-1">
+                    <input type="text" class="answer" placeholder="Resposta incorreta 1" />
+                    <input type="text" class="url" placeholder="URL da imagem 1" />
+                </div>
+
+                <div class="answers answer-incorrect-2">
+                    <input type="text" class="answer" placeholder="Resposta incorreta 2" />
+                    <input type="text" class="url" placeholder="URL da imagem 2" />
+                </div>
+
+                <div class="answers answer-incorrect-3">
+                    <input type="text" class="answers" placeholder="Resposta incorreta 3" />
+                    <input type="text" class="url" placeholder="URL da imagem 3" />
+                </div>
+            </div>
+        </div>
+        <button class="next" onclick="">Prosseguir para criar níveis</button>
+    </div>
+    `
 
 }
 
-function checkURL (url) {
+function checkUrl (url) {
     const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     return regexUrl.test(url);
 }

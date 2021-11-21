@@ -5,16 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/tela03.css">
     <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <title>Buzz Quizz</title>
 </head>
 <body>
     <header class="top">BuzzQuizz</header>
-    <main class="container"><main>
-
+    <main class="container">
+        <div class="create-quiz">
+            <div class="title">Crie suas perguntas</div>
+      
+            <div class="container-questions creating">
+                <div class="title-card-question">
+                  <div class="subtitle">Pergunta</div>
+                  <div class="expand" onclick="">
+                    <ion-icon name="create-outline"></ion-icon>
+                  </div>
+                </div>
+          
+                <div class="questions">
+                  <input type="text" class="answer-texto" placeholder="Texto da pergunta" />
+                  <input type="text" class="answer-cor" placeholder="Cor de fundo da pergunta" />
+          
+                  <div class="subtitle">Resposta correta</div>
+          
+                  <div class="answers">
+                    <input type="text" class="answer-correct" placeholder="Resposta correta" />
+                    <input type="text" class="answer-correct-url" placeholder="URL da imagem" />
+                  </div>
+          
+                  <div class="subtitle">Respostas incorretas</div>
+          
+                  <div class="answers answer-incorrect-1">
+                    <input type="text" class="answer" placeholder="Resposta incorreta 1" />
+                    <input type="text" class="url" placeholder="URL da imagem 1" />
+                  </div>
+          
+                  <div class="answers answer-incorrect-2">
+                    <input type="text" class="answer" placeholder="Resposta incorreta 2" />
+                    <input type="text" class="url" placeholder="URL da imagem 2" />
+                  </div>
+          
+                  <div class="answers answer-incorrect-3">
+                    <input type="text" class="answers" placeholder="Resposta incorreta 3" />
+                    <input type="text" class="url" placeholder="URL da imagem 3" />
+                  </div>
+                </div>
+            </div>
+            <button class="next" onclick="">Prosseguir para criar níveis</button>
+        </div>
+    <main>
     <!-- scripts-->
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script/script.js"></script>
 </body>
