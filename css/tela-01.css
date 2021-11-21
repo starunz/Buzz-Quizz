@@ -1,3 +1,4 @@
+/* ------ Tela 01 ------ */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 *{
@@ -397,3 +398,272 @@ img {
     color: #FFFFFF;
 
 }
+
+
+/* ------ Tela 02 mobile ------ */
+
+@media (max-width: 1100px){
+
+    .titleQuizz{   
+        height: 142px;
+        width: 100vw;
+        position: relative;
+    }
+    .opacity{
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, 0.6);
+    
+        margin-bottom: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        font-family: 'Roboto';
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: center;
+    
+        color: #FFFFFF;
+    }
+    
+    .questionQuiz{
+    
+        height: 440px;
+        width: 100vw;
+        padding-top: 18px;
+        box-shadow: 0px 0px 10px 0px #0000000D;
+        background-color: #FFFFFF;
+        margin-top:24px;
+        margin: 24px auto 0 auto;
+    }
+    
+    
+    .titleQuestion{
+    
+        height: 90px;
+        width: 90%;
+    
+        margin: 0 auto 0 auto;
+    
+        font-family: 'Roboto', 'sans-serif';
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: center;
+    
+        color: #FFFFFF;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .answers{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 13px;
+        margin-left: 18px;
+        margin-right: 18px;
+    }
+    .answerOption{
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 12px;
+        position: relative;
+        z-index: 1;
+    }
+    .answerOption img{
+        height: 113px;
+        width: 163px;
+        margin-bottom: 10px;
+    }
+    .answerOption span{
+        font-family: 'Roboto', 'sans-serif';
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 15px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    .endQuiz{
+        height: 500px;
+        width: 100vw;
+        background-color:#FFFFFF;
+        padding-bottom: 14px;
+        padding-top: 18px;
+        margin-top:24px;
+        margin-bottom: 34px;
+        box-shadow: 0px 0px 10px 0px #0000000D;
+    }
+    .titleEndQuiz{
+        height: 100px;
+        width: 100vw;
+        background-color:#EC362D;
+        margin: 0 auto 0 auto;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    
+        font-family: 'Roboto', 'sans-serif';
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 22px;
+        letter-spacing: 0em;
+        text-align: center;
+        color: #FFFFFF;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .feedback{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .feedback img{
+        height: 255px;
+        width: 90%;  
+    }
+    .feedback .text{
+        width: 90%;
+    
+        font-family: 'Roboto', 'san-serif';
+        font-size: 17px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+    .restart{
+        height: 44px;
+        width: 220px;
+        border-radius: 15px;
+        background-color: #EC362D;
+        margin-bottom: 8px;
+        border: none;
+    
+        font-family: 'Roboto';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: center;
+        
+        color: #FFF5F4;
+    
+    }
+    .home{
+        font-family: 'Roboto';
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: center;
+    
+        color: #818181;
+    
+        height: 44px;
+        width: 220px;
+        margin-bottom: 85px;
+    }
+    }
+    
+    /* ------ Tela 03 ------ */
+    .create-quiz {
+        width: 100%;
+        max-width: 600px;
+        margin: 70px auto 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .create-quiz .title {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 23px;
+    
+        text-align: center;
+    
+        margin-bottom: 30px;
+    }
+    
+    .creating {
+        display: flex;
+        flex-direction: column;
+    
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    
+        padding: 16px;
+    }
+    
+    .creating input {
+        width: 100%;
+        height: 46px;
+        padding-left: 12px;
+        margin: 10px 0;
+    
+        border: 1px solid #d1d1d1;
+        border-radius: 2px;
+        outline: none;
+    
+        font-size: 19px;
+    }
+    
+    .creating input:not(:last-child) {
+        margin-bottom: 0;
+        /*não tem margin-bottom só o último*/
+    }
+    
+    .creating input::placeholder {
+        font-family: 'Roboto', sans-serif;
+        font-style: italic;
+        font-weight: normal;
+        font-size: 19px;
+        line-height: 22px;
+    
+        color: #BABABA;
+    }
+    
+    .next {
+        width: 324px;
+        height: 54px;
+    
+        background: #EC362D;
+        color: #FFF5F4;
+        border-radius: 15px;
+    
+        font-size: 21px;
+    
+        align-self: center;
+        margin-top: 50px;
+    
+        border: none;
+        cursor: pointer;
+    }
+    
+    .next:hover {
+        filter: brightness(0.9);
+    }
+    
+    .next:active {
+        transform: scale(0.90);
+        transition: 1s;
+    }
