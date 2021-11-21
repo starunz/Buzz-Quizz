@@ -35,6 +35,7 @@
     position: fixed;
 
     background-color: #fafafa;
+    overflow-y: auto;
 }
 
 /* ------ Tela 03 ------ */
@@ -124,7 +125,7 @@
 
 .create-quiz .container-questions.creating {
     padding: 5px 15px;
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .create-quiz .title-card-question {
@@ -146,7 +147,7 @@
     display: none;
 }
 
-.create-quiz .expandido .questions {
+.create-quiz .expand .questions {
     display: initial;
 }
 
@@ -161,5 +162,5 @@
 }
 
 .create-quiz .answers {
-    margin: 16px 0;
+    margin: 12px 0;
 }

@@ -80,12 +80,19 @@ function createQuizzQuestions() {
     `
 }
 
-function createCardQuizzQuestions() {
+function createCardQuizzQuestions(index) {
+
+    let Class = ''; //assim as perguntas não começam abertas
+
+    if (index === 0) {
+      Class = 'expand'
+    }//assim a primeira começa aberta 
+
     return `
         <div class="container-questions creating">
             <div class="title-card-question">
-            <div class="subtitle">Pergunta</div>
-                <div class="expand" onclick="">
+            <div class="subtitle">Pergunta ${index + 1}</div>
+                <div class="expand" onclick="expandCard(this)">
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
             </div>
@@ -122,6 +129,13 @@ function createCardQuizzQuestions() {
     `
 }
 
+function expandCard (element) {
+    const card = document.querySelector(".expand");
+    card.classList.remove("expand");
+  
+    element.parentNode.parentNode.classList.add("expand");
+}
+  
 function checkUrl (url) {
     const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     return regexUrl.test(url);
