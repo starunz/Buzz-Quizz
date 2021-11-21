@@ -75,53 +75,53 @@ function createQuizzQuestions() {
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
         ${questions}
-        <button class="next" onclick="">Prosseguir para criar níveis</button>
+        <button class="next" onclick="saveValuesCreateQuizzQuestions()">Prosseguir para criar níveis</button>
     </div>
     `
 }
 
 function createCardQuizzQuestions(index) {
 
-    let Class = ''; //assim as perguntas não começam abertas
+    let cardClass = ''; //assim as perguntas não começam abertas
 
     if (index === 0) {
-      Class = 'expand'
+      cardClass = 'expand'
     }//assim a primeira começa aberta 
 
     return `
-        <div class="container-questions creating">
+        <div class="container-questions creating ${cardClass}">
             <div class="title-card-question">
-            <div class="subtitle">Pergunta ${index + 1}</div>
+                <div class="subtitle">Pergunta ${index + 1}</div>
                 <div class="expand" onclick="expandCard(this)">
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
             </div>
 
             <div class="questions">
-                <input type="text" class="answer-texto" placeholder="Texto da pergunta" />
-                <input type="text" class="answer-cor" placeholder="Cor de fundo da pergunta" />
+                <input type="text" class="answer-${index}-text" placeholder="Texto da pergunta" />
+                <input type="text" class="answer-${index}-color" placeholder="Cor de fundo da pergunta" />
 
                 <div class="subtitle">Resposta correta</div>
 
                 <div class="answers">
-                    <input type="text" class="answer-correct" placeholder="Resposta correta" />
-                    <input type="text" class="answer-correct-url" placeholder="URL da imagem" />
+                    <input type="text" class="answer-correct-${index}" placeholder="Resposta correta" />
+                    <input type="text" class="answer-correct-url-${index}" placeholder="URL da imagem" />
                 </div>
 
                 <div class="subtitle">Respostas incorretas</div>
 
-                <div class="answers answer-incorrect-1">
+                <div class="answers answer-${index}-incorrect-0">
                     <input type="text" class="answer" placeholder="Resposta incorreta 1" />
                     <input type="text" class="url" placeholder="URL da imagem 1" />
                 </div>
 
-                <div class="answers answer-incorrect-2">
+                <div class="answers answer-${index}-incorrect-1">
                     <input type="text" class="answer" placeholder="Resposta incorreta 2" />
                     <input type="text" class="url" placeholder="URL da imagem 2" />
                 </div>
 
-                <div class="answers answer-incorrect-3">
-                    <input type="text" class="answers" placeholder="Resposta incorreta 3" />
+                <div class="answers answer-${index}-incorrect-2">
+                    <input type="text" class="answer" placeholder="Resposta incorreta 3" />
                     <input type="text" class="url" placeholder="URL da imagem 3" />
                 </div>
             </div>
@@ -129,10 +129,49 @@ function createCardQuizzQuestions(index) {
     `
 }
 
+function saveValuesCreateQuizzQuestions() {
+    quizzInfo.questions = [];
+  
+    for (let i = 0; i < quizzInfo.numberQuestions; i++) {
+      const question = {};
+  
+      question.title = document.querySelector(`.answer-${i}-text`).value;
+      question.color = document.querySelector(`.answer-${i}-color`).value;
+  
+      question.answers = [];
+  
+      const correctAnswer = {
+        text: document.querySelector(`.answer-correct-${i}`).value,
+        image: document.querySelector(`.answer-correct-url-${i}`).value,
+        isCorrectAnswer: true
+      };
+  
+      question.answers.push(correctAnswer);
+  
+      for (let j = 0; j < 3; j++) {
+        console.log(`.answer-${i}-incorrect-${j} .answer`)
+        const incorrectAnswer = {
+            text: document.querySelector(`.answer-${i}-incorrect-${j} .answer`).value,
+            image: document.querySelector(`.answer-${i}-incorrect-${j} .url`).value,
+            isCorrectAnswer: false
+        };
+    
+        if (incorrectAnswer.text.length === 0) {
+            continue;
+        } 
+    
+        question.answers.push(incorrectAnswer);
+      }
+  
+      quizzInfo.questions.push(question);
+    } console.log(quizzInfo.questions)
+}
+
+
 function expandCard (element) {
     const card = document.querySelector(".expand");
     card.classList.remove("expand");
-  
+    
     element.parentNode.parentNode.classList.add("expand");
 }
   
