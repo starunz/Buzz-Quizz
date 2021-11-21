@@ -1,14 +1,42 @@
+function sucess(response){
+    const quizzes = response.data;
+    console.log(quizzes)
+    const ulQuizzes = document.querySelector(".list-quizz-server");
+    ulQuizzes.innerHTML = '';
+
+       for (let i = 0; i < quizzes.length; i++){
+            ulQuizzes.innerHTML += ` <li>
+            <div class="quizz-header">
+            
+              <strong class="quizz-title">${quizzes[i].title}</strong>
+              <div class="quizz-question">
+              <div class="layer">
+              <img class="img" src="${quizzes[i].image}" width="340" height="181">     
+              </div>
+            </div>
+            </div>
+            </li>`
+        }
+}
+const promess = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+
+promess.then(sucess);
+
+
+//button
+
 const URL = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da url é sempre a mesma o que muda é a rota.
 const Container = document.querySelector('.container'); //para facilitar a vida, a gente pode usar 1 unica main para todas telas
 //já que vamos criar dinâmicamente, economiza css, html e tempo de ficar procurando :v mas cuidado nos fechamentos das divs :v
 
 // ------ tela 02 ------ 
 callScreen2(2);
-const questionQuiz = document.querySelector('.selectQuiz');
+
 let answersCorret = 0;
 let dataQuiz;
 let numberOfResponses = 0;
 let data;
+let scren2;
 
 function callScreen2(idQuizz){
     const promise = axios.get(URL+"/quizzes/"+idQuizz);
@@ -21,7 +49,9 @@ function loadQuizz(answer){
     data = answer;
     const quizzSelect = answer.data;
     dataQuiz = quizzSelect   
-    questionQuiz.innerHTML = `
+   // questionQuiz.innerHTML = `
+    scren2 = `
+    <div class="selectQuiz">
         <div class="titleQuizz">
             <img src= ${quizzSelect.image}>
             <div class=opacity>${quizzSelect.title}</div>
@@ -44,7 +74,8 @@ function sortAnswer(item){
     html+=`
         </div>
     </div>`
-    questionQuiz.innerHTML += html;
+   // questionQuiz.innerHTML += html;
+   scren2 +=html;
     function loadAnswers(answerOption){
         html += `
                 <div class="answerOption">
@@ -52,6 +83,7 @@ function sortAnswer(item){
                     <span onclick="selectAnswer(this)">${answerOption.text}</span>
                 </div>`;
     }
+    Container.innerHTML = scren2;
 }
 
 
@@ -59,8 +91,7 @@ function selectAnswer(answer, isCorrectAnswer){
     const select = answer.parentNode;
     const parent = select.parentNode;
     const questionAtual = (parent.parentNode).parentNode;
-    console.log(questionAtual)
-
+    console.log(parent.children[1].style.opacity)
     if(parent.children[1].style.opacity <="0.1"){
         numberOfResponses++;
         if(isCorrectAnswer == true){
@@ -92,6 +123,7 @@ function calcPorcent(){
 }
 
 function endQuiz(){
+    const questionQuiz = document.querySelector('.selectQuiz');
     const values = calcPorcent();
     const end = values[0];
     const porcent = values[1];
@@ -111,6 +143,7 @@ function endQuiz(){
     setTimeout(() => { postQuizNavigation();},2000);
 }
 function postQuizNavigation(){
+    const questionQuiz = document.querySelector('.selectQuiz');
     questionQuiz.innerHTML +=`
         <button class="restart" onclick="restart()">Reiniciar Quiz</button>
         <div class="home" onclick="home()">Voltar pra home</div>
@@ -129,7 +162,7 @@ function home(){
 function handleError(erro){
     console.log(erro)
 }
-
+//-------fim tela 02----------
 // ------ tela 03 ------ 
 
 let quizzInfo = {} // guardar as informações que eu preciso em um objeto para validar os campos
@@ -199,3 +232,6 @@ function checkURL (url) {
     const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     return regexUrl.test(url);
 }
+
+//basicQuizzInformation();
+
