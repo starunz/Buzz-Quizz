@@ -64,6 +64,7 @@ function createQuizzQuestions() {
     const validate = validateOfBasicQuizzInfo();
     if (!validate) {
       alert('Preencha os campos corretamente para prosseguir, por favor 🙂');
+      return;
     }
     
     let questions = ''; 
@@ -75,7 +76,7 @@ function createQuizzQuestions() {
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
         ${questions}
-        <button class="next" onclick="saveValuesCreateQuizzQuestions()">Prosseguir para criar níveis</button>
+        <button class="next" onclick="createQuizzLevels()">Prosseguir para criar níveis</button>
     </div>
     `
 }
@@ -158,7 +159,7 @@ function saveValuesCreateQuizzQuestions() {
     
         if (incorrectAnswer.text.length === 0) {
             continue;
-        } 
+        }
     
         question.answers.push(incorrectAnswer);
       }
@@ -166,6 +167,54 @@ function saveValuesCreateQuizzQuestions() {
       quizzInfo.questions.push(question);
     } console.log(quizzInfo.questions)
 }
+
+function validateOfCreateQuizzQuestions() {
+    saveValuesCreateQuizzQuestions();
+  
+    for (let i = 0; i < quizzInfo.questions.length; i++) {
+      const question = quizzInfo.questions[i];
+  
+      if (question.title.length < 20 || question.title.length === 0) {
+        alert('preencha corretamente o titulo')
+        return false;
+      } else if (!checkColor(question.color) || question.color.length === 0) {
+        alert('preencha corretamente a cor ')
+        return false;
+      }
+  
+      if (question.answers.length < 2) {
+        alert('preencha corretamente pelo menos 1 resposta certa e outra errada')
+        return false;
+      }
+  
+      for (let j = 0; j < question.answers.length; j++) {
+        const answer = question.answers[j];
+  
+        if (answer.text.length === 0) {
+            alert('preencha corretamente o campo de texto')
+          return false;
+        } else if (!checkUrl(answer.image)) {
+            alert('preencha corretamente a url')
+          return false;
+        }
+      }
+    }
+  
+    return true;
+}
+
+function createQuizzLevels() {
+    const validate = validateOfCreateQuizzQuestions()
+
+    if(!validate) {
+        alert('preencha os campos corretamente');
+        return;
+    }
+}
+createQuizzLevels()
+
+
+
 
 
 function expandCard (element) {
@@ -178,6 +227,11 @@ function expandCard (element) {
 function checkUrl (url) {
     const regexUrl = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
     return regexUrl.test(url);
+}
+
+function checkColor (color) {
+    const regexColor = /^\#([0-9]|[A-F]|[a-f]){6}$/;
+    return regexColor.test(color);
 }
 
 basicQuizzInformation();
