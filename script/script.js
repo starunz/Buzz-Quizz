@@ -42,28 +42,32 @@ function saveValuesBasicQuizzInformation() {
 }
 
 function validateOfBasicQuizzInfo() {
-    // aqui ficará as validações 
-    // antes disso preciso salvar o valor dos inputs
-
     saveValuesBasicQuizzInformation();
 
     if (quizzInfo.title.length < 20 || quizzInfo.title.length > 65) {
-
+        alert('O título do quizz deve conter no mínimo 20 caracteres e no máximo 65 🙂');
         return false;
-    } else if (!checkUrl(quizzInfo.image)) {
+    } 
+    else if (!checkUrl(quizzInfo.image)) {
+        alert('Insira uma Url válida 🙂');
         return false;
-    } else if (quizzInfo.numberQuestions < 3) {
+    } 
+    else if (quizzInfo.numberQuestions < 3) {
+        alert('O quizz deve conter no mínimo 3 perguntas 🙂');
         return false;
-    } else if (quizzInfo.numberLevels < 2) {
+    } 
+    else if (quizzInfo.numberLevels < 2) {
+        alert('O quizz deve conter no mínimo 2 níveis 🙂');
         return false;
     }
+
     return true;
 }
 
 function createQuizzQuestions() {
     const validate = validateOfBasicQuizzInfo();
+
     if (!validate) {
-      alert('Preencha os campos corretamente para prosseguir, por favor 🙂');
       return;
     }
     
@@ -82,12 +86,11 @@ function createQuizzQuestions() {
 }
 
 function createCardQuizzQuestions(index) {
-
-    let cardClass = ''; //assim as perguntas não começam abertas
+    let cardClass = '';
 
     if (index === 0) {
       cardClass = 'expand'
-    }//assim a primeira começa aberta 
+    }
 
     return `
         <div class="container-questions creating ${cardClass}">
@@ -175,15 +178,16 @@ function validateOfCreateQuizzQuestions() {
       const question = quizzInfo.questions[i];
   
       if (question.title.length < 20 || question.title.length === 0) {
-        alert('preencha corretamente o titulo')
+        alert('O título deve ter no mínimo 20 caracteres 🙂');
         return false;
-      } else if (!checkColor(question.color) || question.color.length === 0) {
-        alert('preencha corretamente a cor ')
+      } 
+      else if (!checkColor(question.color) || question.color.length === 0) {
+        alert('A cor deve ser no formato hexadecimal 🙂 (ex: #000000 para black, #FF0000 para red, #0000FF para blue');
         return false;
       }
   
       if (question.answers.length < 2) {
-        alert('preencha corretamente pelo menos 1 resposta certa e outra errada')
+        alert('O quizz deve conter 1 resposta correta e pelo menos 1 resposta incorreta 🙂');
         return false;
       }
   
@@ -191,10 +195,11 @@ function validateOfCreateQuizzQuestions() {
         const answer = question.answers[j];
   
         if (answer.text.length === 0) {
-            alert('preencha corretamente o campo de texto')
+            alert('Preencha os campos vazios, por favor 🙂');
           return false;
-        } else if (!checkUrl(answer.image)) {
-            alert('preencha corretamente a url')
+        } 
+        else if (!checkUrl(answer.image)) {
+            alert('Insira uma Url válida 🙂');
           return false;
         }
       }
@@ -207,7 +212,6 @@ function createQuizzLevels() {
     const validate = validateOfCreateQuizzQuestions()
 
     if(!validate) {
-        alert('preencha os campos corretamente');
         return;
     }
 }
