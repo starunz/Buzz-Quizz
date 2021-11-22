@@ -44,7 +44,7 @@ function saveValuesBasicQuizzInformation() {
 function validateOfBasicQuizzInfo() {
     saveValuesBasicQuizzInformation();
 
-    if (quizzInfo.title.length < 20 || quizzInfo.title.length > 65) {
+    if (quizzInfo.title.length < 20 || quizzInfo.title.length > 65 || quizzInfo.title.length === 0) {
         alert('O título do quizz deve conter no mínimo 20 caracteres e no máximo 65 🙂');
         return false;
     } 
@@ -52,12 +52,12 @@ function validateOfBasicQuizzInfo() {
         alert('Insira uma Url válida 🙂');
         return false;
     } 
-    else if (quizzInfo.numberQuestions < 3) {
-        alert('O quizz deve conter no mínimo 3 perguntas 🙂');
+    else if (quizzInfo.numberQuestions < 3 || quizzInfo.numberQuestions === 0) {
+        alert('O quizz deve conter no mínimo 3 perguntas 🙂');// ver pq não funciona o vazio
         return false;
     } 
-    else if (quizzInfo.numberLevels < 2) {
-        alert('O quizz deve conter no mínimo 2 níveis 🙂');
+    else if (quizzInfo.numberLevels < 2 || quizzInfo.numberLevels === 0) {
+        alert('O quizz deve conter no mínimo 2 níveis 🙂');// a mesma coisa
         return false;
     }
 
@@ -196,7 +196,7 @@ function validateOfCreateQuizzQuestions() {
   
         if (answer.text.length === 0) {
             alert('Preencha os campos vazios, por favor 🙂');
-          return false;
+          return false;// ver pq não tá funcionando
         } 
         else if (!checkUrl(answer.image)) {
             alert('Insira uma Url válida 🙂');
@@ -214,8 +214,31 @@ function createQuizzLevels() {
     if(!validate) {
         return;
     }
+
+    Container.innerHTML = `
+    <div class="create-quiz">
+        <div class="title">Crie suas perguntas</div>
+
+        <div class="container-level creating ">
+            <div class="title-card-question">
+                <div class="subtitle">Nível </div>
+                <div class="expand" onclick="expandCard(this)">
+                    <ion-icon name="create-outline"></ion-icon>
+                </div>
+            </div>
+    
+            <div class="questions">
+                <input type="text" class="level--title" placeholder="Título do nível" />
+                <input type="number" class="level--success" placeholder="% de acerto mínima" />
+                <input type="text" class="level--url" placeholder="URL da imagem do nível" />
+                <input type="text" class="level--description" placeholder="Descrição do nível" />
+            </div>
+        </div>
+        
+        <button class="next" onclick="">Prosseguir para criar níveis</button>
+    </div>
+    `
 }
-createQuizzLevels()
 
 
 
