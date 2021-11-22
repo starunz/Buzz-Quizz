@@ -12,7 +12,8 @@ function basicQuizzInformation() {
         image: '',
         numberQuestions: 0,
         numberLevels: 0,
-        questions: []
+        questions: [],
+        levels: []
     }
 
     Container.innerHTML = `
@@ -226,7 +227,7 @@ function createQuizzLevels() {
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
         ${levels}
-        <button class="next" onclick="">Prosseguir para criar níveis</button>
+        <button class="next" onclick="saveValuesCreateQuizzLevels()">Prosseguir para criar níveis</button>
     </div>
     `
 }
@@ -256,6 +257,24 @@ function createCardQuizzLevels(index) {
     </div>
     `
 }
+
+function saveValuesCreateQuizzLevels(){
+    quizzInfo.levels = [];
+
+    for (let i = 0; i < quizzInfo.numberLevels; i++) {
+        const level = {
+          title: document.querySelector(`.level-${i}-title`).value,
+          image: document.querySelector(`.level-${i}-url`).value,
+          text: document.querySelector(`.level-${i}-description`).value,
+          minValue: parseInt(document.querySelector(`.level-${i}-success`).value),
+        };
+    
+        quizzInfo.levels.push(level);
+        console.log(quizzInfo.levels)
+    }
+}
+
+
 
 function expandCard (element) {
     const card = document.querySelector(".expand");
