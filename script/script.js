@@ -227,7 +227,7 @@ function createQuizzLevels() {
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
         ${levels}
-        <button class="next" onclick="validateOfCreateQuizzLevels()">Prosseguir para criar níveis</button>
+        <button class="next" onclick="finishedQuizz()">Prosseguir para criar níveis</button>
     </div>
     `
 }
@@ -276,7 +276,6 @@ function saveValuesCreateQuizzLevels(){
 
 function validateOfCreateQuizzLevels(){
     saveValuesCreateQuizzLevels();
-
     let containZeroLevel = false;
   
     for (let i = 0; i < quizzInfo.levels.length; i++) {
@@ -306,6 +305,70 @@ function validateOfCreateQuizzLevels(){
   
     return containZeroLevel;
 }
+
+function finishedQuizz() {
+    const validate = validateOfCreateQuizzLevels();
+    if (!validate) {
+        return;
+    }
+
+    postFinishedQuizz();
+}
+
+function postFinishedQuizz() {
+    const info = {
+        title: quizzInfo.title,
+        image: quizzInfo.image,
+        questions: quizzInfo.questions,
+        levels: quizzInfo.levels
+    };
+    
+    const promise = axios.post(`${Url}/quizzes`, info);
+    promise.then(saveQuizzLocalStorage);
+}
+
+function saveQuizzLocalStorage (response) {
+    const quizz = response.data;
+    const dataLocal = catchQuizzesLocalStorage();
+  
+    dataLocal.push({
+      id: quizz.id,
+      key: quizz.key
+    });
+  
+    localStorage.setItem('quizz', JSON.stringify(dataLocal));
+  
+    createQuizzSuccess(quizz.id);
+}
+
+function catchQuizzesLocalStorage () {
+    let data = localStorage.getItem('quizz');
+  
+    if(data !== null) {
+      const objectData = JSON.parse(data);
+      return objectData;
+    } else {
+      return [];
+    }
+}
+
+function createQuizzSuccess (id) {
+
+    Container.innerHTML = `
+    <div class="create-quiz">
+        <div class="title">Seu quizz está pronto!</div>
+
+        <div class="quizz" onclick="(${id})">
+            <img src="${quizzInfo.image}">
+            <div class="overlay"></div>
+            <div class="title">${quizzInfo.title}</div>
+        </div>
+
+        <button class="next" onclick="(${id})">Acessar Quizz</button>
+        <button class="next" onclick="">Voltar pra home</button>
+    </div>
+    `;
+}//chamar a função da tela 2 e tela 1 
 
 function expandCard (element) {
     const card = document.querySelector(".expand");
