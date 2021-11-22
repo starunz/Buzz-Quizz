@@ -215,34 +215,47 @@ function createQuizzLevels() {
         return;
     }
 
+    let levels = '';
+
+    for(let i = 0; i < quizzInfo.numberLevels; i++ ){
+        levels += createCardQuizzLevels(i)
+
+    }
+
     Container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
-
-        <div class="container-level creating ">
-            <div class="title-card-question">
-                <div class="subtitle">Nível </div>
-                <div class="expand" onclick="expandCard(this)">
-                    <ion-icon name="create-outline"></ion-icon>
-                </div>
-            </div>
-    
-            <div class="questions">
-                <input type="text" class="level--title" placeholder="Título do nível" />
-                <input type="number" class="level--success" placeholder="% de acerto mínima" />
-                <input type="text" class="level--url" placeholder="URL da imagem do nível" />
-                <input type="text" class="level--description" placeholder="Descrição do nível" />
-            </div>
-        </div>
-        
+        ${levels}
         <button class="next" onclick="">Prosseguir para criar níveis</button>
     </div>
     `
 }
 
+function createCardQuizzLevels(index) {
+    let cardClass = '';
 
+    if (index === 0) {
+      cardClass = 'expand'
+    }
 
+    return `
+    <div class="container-level creating ${cardClass}">
+        <div class="title-card-question">
+            <div class="subtitle">Nível ${index + 1} </div>
+            <div class="expand" onclick="expandCard(this)">
+                <ion-icon name="create-outline"></ion-icon>
+            </div>
+        </div>
 
+        <div class="questions">
+            <input type="text" class="level-${index}-title" placeholder="Título do nível" />
+            <input type="number" class="level-${index}-success" placeholder="% de acerto mínima" />
+            <input type="text" class="level-${index}-url" placeholder="URL da imagem do nível" />
+            <input type="text" class="level-${index}-description" placeholder="Descrição do nível" />
+        </div>
+    </div>
+    `
+}
 
 function expandCard (element) {
     const card = document.querySelector(".expand");
