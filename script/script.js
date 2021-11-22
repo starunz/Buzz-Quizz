@@ -227,7 +227,7 @@ function createQuizzLevels() {
     <div class="create-quiz">
         <div class="title">Crie suas perguntas</div>
         ${levels}
-        <button class="next" onclick="saveValuesCreateQuizzLevels()">Prosseguir para criar níveis</button>
+        <button class="next" onclick="validateOfCreateQuizzLevels()">Prosseguir para criar níveis</button>
     </div>
     `
 }
@@ -274,7 +274,38 @@ function saveValuesCreateQuizzLevels(){
     }
 }
 
+function validateOfCreateQuizzLevels(){
+    saveValuesCreateQuizzLevels();
 
+    let containZeroLevel = false;
+  
+    for (let i = 0; i < quizzInfo.levels.length; i++) {
+      const level = quizzInfo.levels[i];
+  
+      if (level.minValue === 0 && level.minValue !== NaN) {
+        containZeroLevel = true;//ver pq não funiona
+      }
+
+      if (level.title.length < 10) {
+        alert('O título deve ter pelo menos 10 caracteres 🙂');
+        return false;
+      }
+      else if (level.minValue === NaN && (level.minValue < 0 || level.minValue > 100)) {
+        alert('A % de acerto mínima deve ser entre 0 e 100 🙂'); //ver pq não funiona
+        return false;
+      }
+      else if (!checkUrl(level.image)) {
+        alert('Insira uma Url válida 🙂');
+        return false;
+      } 
+      else if (level.text.length < 30) {
+        alert('A descrição do nível deve ter no mínimo 30 caracteres 🙂');
+        return false;
+      }
+    }
+  
+    return containZeroLevel;
+}
 
 function expandCard (element) {
     const card = document.querySelector(".expand");
