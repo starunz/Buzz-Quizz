@@ -1,4 +1,4 @@
-const Url = 'https://mock-api.driven.com.br/api/v4/buzzquizz';
+const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz';
 const container = document.querySelector('.container');
 
 function sucess(response){
@@ -25,7 +25,7 @@ function sucess(response){
 
 }
 
-const promess = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+const promess = axios.get(`${url}/quizzes`);
 promess.then(sucess);
 function showScreenTwo(quizzId){
     const screenOne = document.querySelector(".tela-01");
@@ -43,7 +43,7 @@ let data;
 let scren2;
 
 function callScreen2(idQuizz){
-    const promise = axios.get(URL+"/quizzes/"+idQuizz);
+    const promise = axios.get(`${url}/quizzes/${idQuizz}`);
     promise.then(loadQuizz);
 }
 
@@ -211,7 +211,7 @@ function validateOfBasicQuizzInfo() {
         return false;
     } 
     else if (!checkUrl(quizzInfo.image)) {
-        alert('Insira uma Url válida 🙂');
+        alert('Insira uma url válida 🙂');
         return false;
     } 
     else if (quizzInfo.numberQuestions < 3 || isNaN(quizzInfo.numberQuestions)) {
@@ -356,7 +356,7 @@ function validateOfCreateQuizzQuestions() {
           return false;
         } 
         else if (!checkUrl(answer.image)) {
-            alert('Insira uma Url válida 🙂');
+            alert('Insira uma url válida 🙂');
           return false;
         }
       }
@@ -445,7 +445,7 @@ function validateOfCreateQuizzLevels(){
         return false;
       }
       else if (!checkUrl(level.image)) {
-        alert('Insira uma Url válida 🙂');
+        alert('Insira uma url válida 🙂');
         return false;
       } 
       else if (level.text.length < 30) {
@@ -477,7 +477,7 @@ function postFinishedQuizz() {
         levels: quizzInfo.levels
     };
     
-    const promise = axios.post(`${Url}/quizzes`, info);
+    const promise = axios.post(`${url}/quizzes`, info);
     promise.then(saveQuizzLocalStorage);
 }
 
