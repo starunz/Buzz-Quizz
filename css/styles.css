@@ -3,6 +3,7 @@
 
 *{
     box-sizing: border-box;
+    word-break: break-all;
 }
 
 .top {
@@ -27,15 +28,55 @@
     font-size: 37px;
     line-height: 43px;
 }
+.top h1{
+    cursor: pointer;
+}
+
 
 .container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     top: 69px;
     position: fixed;
 
     overflow-y: auto;
     background-color: #fafafa;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.icon{
+    color: #EC362D;
+   font-size: 30px;
+   margin-left: 17px;
+   margin-bottom: 13px;
+}
+
+.userStorage{
+    width: 300px;
+    margin-top: 50px;
+   
+    position: relative;
+    display: flex;
+    align-items: center;
+    right: 376px;
+    top: 40px;
+}
+.userStorage span {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;  
+
+    margin-bottom: 13px;
+}
+.quizz-question{
+    display: flex;
 }
 
 .tela-01 {
@@ -46,39 +87,63 @@
     flex-direction: column;
     align-items: center;
 
-    margin: 77px auto;
+    margin: 77px 0 auto;
     z-index: 3232;
 }
 
-.quizz{
-    width: 100%;
-    height: 500px;
-    margin-bottom: 77px;
+.quizzes{
+    width: 1051px;
+    height: 260px;
 
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center; 
+
 }
 
 .list-quizz {
     display: flex;
     background-color: white;
 }
-
-.user-quizz {
-    background: #FAFAFA;
+.noneStorage{
     border: 1px dashed #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
-    
+
+    margin: 77px 0 auto;
     width: 1051px;
-    height: 181px;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.noneStorage span{
+    margin-top: 45px;
+    margin-bottom: 30px;
+    width: 210px;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #B9B9B9;
+    
+}
+
+.user-quizz  {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    gap: 150px;
 }
 
 .button{
@@ -89,6 +154,7 @@
     border: 1px dashed #EC362D;
     box-sizing: border-box;
     border-radius: 50px;
+    margin-bottom: 30px;
     
     color: #EC362D;
     font-family: Roboto;
@@ -99,14 +165,12 @@
 }
 
 .user-list{
-    width: 250px;
+    width: 210px;
     height: 110px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-
 .user-list span {
     font-family: Roboto;
     font-style: normal;
@@ -140,6 +204,7 @@
     flex-direction: column;
     align-items: center;
     width: 1080px;
+    padding-bottom: 100px;
 }
 
 .content h3{
@@ -158,11 +223,6 @@
     gap: 30px;
 }
 
-img {
-    position: relative;
-    border-radius: 5px;
-    z-index: -1;
-}
 
 .quizz-server {
     position: relative;
@@ -176,7 +236,7 @@ img {
     left: 18px;
     width: 300px;
     height: 54px;
-      
+    
     font-family: Roboto;
     font-style: normal;
     font-weight: normal;
@@ -184,11 +244,16 @@ img {
     line-height: 22px;
     display: flex;
     align-items: center;
-
+    
     color: #FFFFFF;
 }
 
-.layer{
+img {
+    position: relative;
+    border-radius: 5px;
+    z-index: -1;
+}
+.layer .hide{
     width: 100%;
     height: 100%;
     background-image: linear-gradient(
@@ -327,14 +392,13 @@ img {
     line-height: 25px;
     letter-spacing: 0em;
     text-align: center;
-    color: #FFF5F4;
+    color: #818181;
 
     height: 52px;
     width: 260px;
     margin-bottom: 85px;
-    background-color: #EC362D;
-    border-radius: 15px;
     border: none;
+    background-color: none;
 }
 
 .titleEndQuiz{
@@ -592,22 +656,7 @@ img {
     
     }
 
-    .home{
-        font-family: 'Roboto';
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 21px;
-        letter-spacing: 0em;
-        text-align: center;
-    
-        color: #818181;
-    
-        height: 44px;
-        width: 220px;
-        margin-bottom: 85px;
-    }
-}
+
     
 /* ------ Tela 03 ------ */
 .create-quiz {
@@ -862,3 +911,4 @@ img {
     transition: 1s;
 }
   
+}

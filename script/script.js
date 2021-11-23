@@ -1,37 +1,63 @@
 const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz';
 const container = document.querySelector('.container');
 
-function sucess(response){
-    const quizzes = response.data;
-    const ulQuizzes = document.querySelector(".list-quizz-server");
-    ulQuizzes.innerHTML = '';
-    
-    
-    for (let i = 0; i < quizzes.length; i++){
-           
-        ulQuizzes.innerHTML += ` 
-        <li>
+function sucess(response) {
+  const quizzes = response.data;
+  const ulQuizzes = document.querySelector(".list-quizz-server");
+  const ulUserQuizz = document.querySelector(".user-quizz");
+  ulQuizzes.innerHTML = "";
+  ulUserQuizz.innerHTML = "";
+
+  const userQuizzStorage = catchQuizzesLocalStorage();
+  for (let i = 0; i < quizzes.length; i++) {
+    userQuizzStorage.forEach((userQuizz) => {
+      if (quizzes[i].id === userQuizz.id) {
+        ulUserQuizz.innerHTML += ` <li class="user-list"> 
             <div class="quizz-server" onclick="showScreenTwo(${quizzes[i].id})" >
-        
-                <strong class="quizz-title">${quizzes[i].title}</strong>
-                <div class="quizz-question">
-                    <div class="layer">
-                        <img class="img" src="${quizzes[i].image}" width="340" height="181">     
-                    </div>
+            <strong class="quizz-title">${quizzes[i].title}</strong>
+            <div class="quizz-question">
+                <div class="layer">
+                    <img class="img" src="${quizzes[i].image}" width="340" height="181">     
                 </div>
             </div>
-        </li>`
-    }
-
+        </div>
+            </li>`;
+            showUserQuizz ()
+      } else {
+        ulQuizzes.innerHTML += ` 
+            <li>
+                <div class="quizz-server" onclick="showScreenTwo(${quizzes[i].id})" >
+            
+                    <strong class="quizz-title">${quizzes[i].title}</strong>
+                    <div class="quizz-question">
+                        <div class="layer">
+                            <img class="img" src="${quizzes[i].image}" width="340" height="181">     
+                        </div>
+                    </div>
+                </div>
+            </li>`;
+      } 
+    });
+  }
 }
 
 const promess = axios.get(`${url}/quizzes`);
 promess.then(sucess);
+
+
 function showScreenTwo(quizzId){
     const screenOne = document.querySelector(".tela-01");
     screenOne.classList.add("hide");
 
     callScreen2(quizzId)
+}
+
+function showUserQuizz (){
+    const showUser = document.querySelector(".noneStorage");
+    const showUserHeader = document.querySelector(".quizzes");
+    
+    showUser.classList.add('hide');
+    showUserHeader.classList.toggle('hide');
 }
 
 // ------ tela 02 ------ 
@@ -149,7 +175,7 @@ function postQuizNavigation(){
     const questionQuiz = document.querySelector('.selectQuiz');
     questionQuiz.innerHTML +=`
         <button class="restart" onclick="restart()">Reiniciar Quiz</button>
-        <button class="home" onclick="home()">Voltar pra home</button>
+        <div class="home" onclick="home()">Voltar pra home</div>
     `
 }
 function restart(){
@@ -258,30 +284,23 @@ function createCardQuizzQuestions(index) {
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
             </div>
-
             <div class="questions">
                 <input type="text" class="answer-${index}-text" placeholder="Texto da pergunta" />
                 <input type="text" class="answer-${index}-color" placeholder="Cor de fundo da pergunta" />
-
                 <div class="subtitle">Resposta correta</div>
-
                 <div class="answers">
                     <input type="text" class="answer-correct-${index}" placeholder="Resposta correta" />
                     <input type="text" class="answer-correct-url-${index}" placeholder="URL da imagem" />
                 </div>
-
                 <div class="subtitle">Respostas incorretas</div>
-
                 <div class="answers answer-${index}-incorrect-0">
                     <input type="text" class="answer" placeholder="Resposta incorreta 1" />
                     <input type="text" class="url" placeholder="URL da imagem 1" />
                 </div>
-
                 <div class="answers answer-${index}-incorrect-1">
                     <input type="text" class="answer" placeholder="Resposta incorreta 2" />
                     <input type="text" class="url" placeholder="URL da imagem 2" />
                 </div>
-
                 <div class="answers answer-${index}-incorrect-2">
                     <input type="text" class="answer" placeholder="Resposta incorreta 3" />
                     <input type="text" class="url" placeholder="URL da imagem 3" />
@@ -399,7 +418,6 @@ function createCardQuizzLevels(index) {
                 <ion-icon name="create-outline"></ion-icon>
             </div>
         </div>
-
         <div class="questions">
             <input type="text" class="level-${index}-title" placeholder="Título do nível" />
             <input type="number" class="level-${index}-success" placeholder="% de acerto mínima" />
@@ -510,15 +528,13 @@ function createQuizzSuccess (id) {
     container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Seu quizz está pronto!</div>
-
-        <div class="quizz quizz-sucess" onclick="(${id})">
+        <div class="quizz" onclick="(${id})">
             <img src="${quizzInfo.image}">
             <div class="overlay"></div>
             <div class="title-sucess">${quizzInfo.title}</div>
         </div>
-
-        <button class="next-quizz" onclick="(${id})">Acessar Quizz</button>
-        <button class="next-home" onclick="">Voltar pra home</button>
+        <button class="next" onclick="(${id})">Acessar Quizz</button>
+        <div class="home" onclick="home()">Voltar pra home</div>
     </div>
     `;
 }//chamar a função da tela 2 e tela 1 
