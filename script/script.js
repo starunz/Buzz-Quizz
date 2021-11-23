@@ -53,8 +53,14 @@ function showScreenTwo(quizzId){
 }
 
 function showUserQuizz (){
-    const showUser = document.querySelector(".noneStorage");
-    showUser.classList.add('hide');
+    const showUser = document.querySelector(".userStorage");
+    const showUserHeader = document.querySelector(".quizzes");
+    const removeNone = document.querySelector('.noneStorage');
+    
+    removeNone.classList.add('hide');
+    showUser.classList.remove('hide');
+    showUserHeader.classList.remove('hide');
+
 }
 
 // ------ tela 02 ------ 
@@ -172,7 +178,7 @@ function postQuizNavigation(){
     const questionQuiz = document.querySelector('.selectQuiz');
     questionQuiz.innerHTML +=`
         <button class="restart" onclick="restart()">Reiniciar Quiz</button>
-        <button class="home" onclick="home()">Voltar pra home</button>
+        <div class="home" onclick="home()">Voltar pra home</div>
     `
 }
 function restart(){
@@ -530,8 +536,8 @@ function createQuizzSuccess (id) {
             <div class="overlay"></div>
             <div class="title">${quizzInfo.title}</div>
         </div>
-        <button class="next" onclick="(${id})">Acessar Quizz</button>
-        <button class="next" onclick="">Voltar pra home</button>
+        <button class="next" onclick="callScreen2(${id})">Acessar Quizz</button>
+        <div class="home" onclick="home()">Voltar pra home</div>
     </div>
     `;
 }//chamar a função da tela 2 e tela 1 
