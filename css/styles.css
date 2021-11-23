@@ -13,7 +13,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: 1323232;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -242,6 +242,7 @@
     line-height: 22px;
     display: flex;
     align-items: center;
+    z-index: 5;
     
     color: #FFFFFF;
 }
@@ -249,9 +250,9 @@
 img {
     position: relative;
     border-radius: 5px;
-    z-index: -1;
+    z-index: 1;
 }
-.layer .hide{
+.layer {
     width: 100%;
     height: 100%;
     background-image: linear-gradient(
@@ -261,10 +262,49 @@ img {
     #000000 100%
     );
     border-radius: 5px;
+    z-index: 3;
 }
 
 .hide {
     display: none;
+}
+
+/* ------ Tela 01 mobile ------ */
+
+@media (max-width: 1100px){
+.container{   
+    width: 100%;
+    height: 100%;
+    position: initial;
+}
+.userStorage{
+    position: initial;
+    margin-top: 90px;
+}
+.noneStorage{
+    width: 340px;
+    height: 181px;
+}
+.tela-01 {
+    margin: 0 auto;
+    height: auto    ;
+}
+
+.user-quizz{
+    width: auto;
+
+}
+.all-quizz{
+    width: 350px;
+}
+.user-list{
+    width: auto;
+    height: auto;
+    align-items: initial;
+}
+.content {
+    width: auto;
+}
 }
   
 /* ------ Tela 02 ------ */

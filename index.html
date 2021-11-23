@@ -17,15 +17,15 @@
     <main class="container">
         <div class="userStorage hide">
             <span>Seus Quizzes</span>
-            <ion-icon class="icon" onclick="basicQuizzInformation()" name="add-circle-sharp"></ion-icon>
+            <ion-icon class="icon" data-identifier="create-quizz" onclick="basicQuizzInformation()" name="add-circle-sharp"></ion-icon>
             </div>
         <div class="noneStorage">
             <span>  Você não criou nenhum quizz ainda :( </span>
-            <button class="button" onclick="basicQuizzInformation()">Criar Quizz</button>
+            <button class="button" data-identifier="create-quizz" onclick="basicQuizzInformation()">Criar Quizz</button>
         </div>
         <div class="tela-01">
-            <div class="quizzes hide">
-                <ul class="user-quizz">
+            <div data-identifier="quizz-card" class="quizzes hide">
+                <ul class="user-quizz" data-identifier="user-quizzes">
                     <li class="user-list">
                     </li>
                 </ul>
@@ -34,8 +34,8 @@
         
         <div class="content">
             <h3>Todos os Quizzes</h3>
-            <div class="all-quizz">
-                <ul class="list-quizz-server">
+            <div class="all-quizz" >
+                <ul class="list-quizz-server" data-identifier="general-quizzes">
                     <li class="server-list">
                         
                     </li>
