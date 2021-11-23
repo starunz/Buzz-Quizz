@@ -5,11 +5,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: #D5D5D5;
-    padding: 0 70px;
-}
-
 .top {
     width: 100%;
     height: 69px;
@@ -148,7 +143,7 @@ body {
 }
 
 .content h3{
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
@@ -775,7 +770,7 @@ img {
     );
 }
 
-.quizz .title {
+.create-quiz.quizz .title {
     position: absolute;
     bottom: 0;
     left: 0;

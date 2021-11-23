@@ -9,25 +9,25 @@ function sucess(response){
     
     for (let i = 0; i < quizzes.length; i++){
            
-            ulQuizzes.innerHTML += ` <li>
+        ulQuizzes.innerHTML += ` 
+        <li>
             <div class="quizz-server" onclick="showScreenTwo(${quizzes[i].id})" >
-            
-              <strong class="quizz-title">${quizzes[i].title}</strong>
-              <div class="quizz-question">
-              <div class="layer">
-              <img class="img" src="${quizzes[i].image}" width="340" height="181">     
-              </div>
+        
+                <strong class="quizz-title">${quizzes[i].title}</strong>
+                <div class="quizz-question">
+                    <div class="layer">
+                        <img class="img" src="${quizzes[i].image}" width="340" height="181">     
+                    </div>
+                </div>
             </div>
-            </div>
-            </li>`
-        }
+        </li>`
+    }
+
 }
+
 const promess = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
-
 promess.then(sucess);
-
-
-    function showScreenTwo(quizzId){
+function showScreenTwo(quizzId){
     const screenOne = document.querySelector(".tela-01");
     screenOne.classList.add("hide");
 
@@ -45,7 +45,6 @@ let scren2;
 function callScreen2(idQuizz){
     const promise = axios.get(URL+"/quizzes/"+idQuizz);
     promise.then(loadQuizz);
-    promise.catch(handleError);
 }
 
 
@@ -95,7 +94,7 @@ function selectAnswer(answer, isCorrectAnswer){
     const select = answer.parentNode;
     const parent = select.parentNode;
     const questionAtual = (parent.parentNode).parentNode;
-    console.log(parent.children[1].style.opacity)
+
     if(parent.children[1].style.opacity <="0.1"){
         numberOfResponses++;
         if(isCorrectAnswer == true){
@@ -163,13 +162,11 @@ function restart(){
 function home(){
     window.location.reload()
 }
-function handleError(erro){
-    console.log(erro)
-} 
-//-------fim tela 02----------
-// ------ tela 03 ------ 
 
-let quizzInfo = {} // guardar as informações que eu preciso em um objeto para validar os campos
+//-------fim tela 02----------
+// ------ tela 03 ------------
+
+let quizzInfo = {}
 function basicQuizzInformation() {
     quizzInfo = {
         title: '',
@@ -217,12 +214,12 @@ function validateOfBasicQuizzInfo() {
         alert('Insira uma Url válida 🙂');
         return false;
     } 
-    else if (quizzInfo.numberQuestions < 3 || quizzInfo.numberQuestions === 0) {
-        alert('O quizz deve conter no mínimo 3 perguntas 🙂');// ver pq não funciona o vazio
+    else if (quizzInfo.numberQuestions < 3 || isNaN(quizzInfo.numberQuestions)) {
+        alert('O quizz deve conter no mínimo 3 perguntas 🙂');
         return false;
     } 
-    else if (quizzInfo.numberLevels < 2 || quizzInfo.numberLevels === 0) {
-        alert('O quizz deve conter no mínimo 2 níveis 🙂');// a mesma coisa
+    else if (quizzInfo.numberLevels < 2 || isNaN(quizzInfo.numberLevels)) {
+        alert('O quizz deve conter no mínimo 2 níveis 🙂');
         return false;
     }
 
@@ -232,10 +229,8 @@ function validateOfBasicQuizzInfo() {
 function createQuizzQuestions() {
     const validate = validateOfBasicQuizzInfo();
 
-    if (!validate) {
-      return;
-    }
-    
+    if (!validate) return;
+
     let questions = ''; 
     for(let i = 0 ; i < quizzInfo.numberQuestions; i++){
         questions += createCardQuizzQuestions(i);
@@ -253,9 +248,7 @@ function createQuizzQuestions() {
 function createCardQuizzQuestions(index) {
     let cardClass = '';
 
-    if (index === 0) {
-      cardClass = 'expand'
-    }
+    if (index === 0) cardClass = 'expand';
 
     return `
         <div class="container-questions creating ${cardClass}">
@@ -318,14 +311,13 @@ function saveValuesCreateQuizzQuestions() {
       question.answers.push(correctAnswer);
   
       for (let j = 0; j < 3; j++) {
-        console.log(`.answer-${i}-incorrect-${j} .answer`)
         const incorrectAnswer = {
             text: document.querySelector(`.answer-${i}-incorrect-${j} .answer`).value,
             image: document.querySelector(`.answer-${i}-incorrect-${j} .url`).value,
             isCorrectAnswer: false
         };
     
-        if (incorrectAnswer.text.length === 0) {
+        if (incorrectAnswer.text.length === 0 && incorrectAnswer.image.length === 0 ) {
             continue;
         }
     
@@ -333,7 +325,7 @@ function saveValuesCreateQuizzQuestions() {
       }
   
       quizzInfo.questions.push(question);
-    } console.log(quizzInfo.questions)
+    } 
 }
 
 function validateOfCreateQuizzQuestions() {
@@ -358,10 +350,10 @@ function validateOfCreateQuizzQuestions() {
   
       for (let j = 0; j < question.answers.length; j++) {
         const answer = question.answers[j];
-  
-        if (answer.text.length === 0) {
+
+        if (answer.text.length === 0 && answer.image.length !== 0) {
             alert('Preencha os campos vazios, por favor 🙂');
-          return false;// ver pq não tá funcionando
+          return false;
         } 
         else if (!checkUrl(answer.image)) {
             alert('Insira uma Url válida 🙂');
@@ -376,9 +368,7 @@ function validateOfCreateQuizzQuestions() {
 function createQuizzLevels() {
     const validate = validateOfCreateQuizzQuestions()
 
-    if(!validate) {
-        return;
-    }
+    if(!validate) return;
 
     let levels = '';
 
@@ -399,9 +389,7 @@ function createQuizzLevels() {
 function createCardQuizzLevels(index) {
     let cardClass = '';
 
-    if (index === 0) {
-      cardClass = 'expand'
-    }
+    if (index === 0) cardClass = 'expand';
 
     return `
     <div class="container-level creating ${cardClass}">
@@ -434,7 +422,6 @@ function saveValuesCreateQuizzLevels(){
         };
     
         quizzInfo.levels.push(level);
-        console.log(quizzInfo.levels)
     }
 }
 
@@ -445,16 +432,16 @@ function validateOfCreateQuizzLevels(){
     for (let i = 0; i < quizzInfo.levels.length; i++) {
       const level = quizzInfo.levels[i];
   
-      if (level.minValue === 0 && level.minValue !== NaN) {
-        containZeroLevel = true;//ver pq não funiona
+      if (level.minValue === 0) {
+        containZeroLevel = true;
       }
 
       if (level.title.length < 10) {
         alert('O título deve ter pelo menos 10 caracteres 🙂');
         return false;
       }
-      else if (level.minValue === NaN && (level.minValue < 0 || level.minValue > 100)) {
-        alert('A % de acerto mínima deve ser entre 0 e 100 🙂'); //ver pq não funiona
+      else if (level.minValue < 0 || level.minValue > 100 || isNaN(level.minValue)) {
+        alert('A % de acerto mínima deve ser entre 0 e 100 🙂');
         return false;
       }
       else if (!checkUrl(level.image)) {
@@ -466,15 +453,18 @@ function validateOfCreateQuizzLevels(){
         return false;
       }
     }
+
+    if(!containZeroLevel) {
+        alert('O quizz deve conter pelo menos um nível com % 0 🙂');
+        return false; 
+    }
   
     return containZeroLevel;
 }
 
 function finishedQuizz() {
     const validate = validateOfCreateQuizzLevels();
-    if (!validate) {
-        return;
-    }
+    if (!validate) return;
 
     postFinishedQuizz();
 }
@@ -517,7 +507,6 @@ function catchQuizzesLocalStorage () {
 }
 
 function createQuizzSuccess (id) {
-
     container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Seu quizz está pronto!</div>
@@ -550,5 +539,3 @@ function checkColor (color) {
     const regexColor = /^\#([0-9]|[A-F]|[a-f]){6}$/;
     return regexColor.test(color);
 }
-
-basicQuizzInformation();
