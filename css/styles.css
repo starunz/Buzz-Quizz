@@ -5,9 +5,7 @@
     box-sizing: border-box;
     word-break: break-all;
 }
-body{
-    background-color: #D5D5D5;
-}
+
 .top {
     width: 100%;
     height: 69px;
@@ -33,6 +31,8 @@ body{
 .top h1{
     cursor: pointer;
 }
+
+
 .container {
     width: 100%;
     height: 100%;
@@ -41,23 +41,29 @@ body{
 
     overflow-y: auto;
     background-color: #fafafa;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
+
 .icon{
-     z-index: 13230;
-    height: 30px;
-    width: 30px;
-    margin-left: 17px;
-    margin-bottom: 13px;
+    color: #EC362D;
+   font-size: 30px;
+   margin-left: 17px;
+   margin-bottom: 13px;
 }
+
 .userStorage{
     width: 300px;
     margin-top: 50px;
-
+   
+    position: relative;
     display: flex;
     align-items: center;
+    right: 376px;
+    top: 40px;
 }
 .userStorage span {
     font-family: 'Roboto';
@@ -69,15 +75,20 @@ body{
 
     margin-bottom: 13px;
 }
+.quizz-question{
+    display: flex;
+}
+
 .tela-01 {
     width: 100%;
-      
+    height: 100vh;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
 
     margin: 77px 0 auto;
-    z-index: 3;
+    z-index: 3232;
 }
 
 .quizzes{
@@ -88,51 +99,52 @@ body{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center; 
+
 }
 
 .list-quizz {
     display: flex;
     background-color: white;
 }
-
-.user-quizz {
-    background: #FAFAFA;
+.noneStorage{
     border: 1px dashed #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
     
     width: 1051px;
-    height: 181px;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.loading{
-    width: 100%;
-    height: 100%;
-    background-color: aquamarine;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.noneStorage span{
+    margin-top: 45px;
+    margin-bottom: 30px;
+    width: 210px;
 
-    color: #EC362D;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: normal;
-    font-size: 25px;
-    line-height: 29px;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
     text-align: center;
+
+    color: #B9B9B9;
+    
 }
-.gif{
-    z-index: 5;
-    margin: 0 auto;
-    width: 180px;
-    height: 180px;
+
+.user-quizz  {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    gap: 150px;
 }
+
 .button{
     width: 151px;
     height: 40px;
@@ -141,9 +153,10 @@ body{
     border: 1px dashed #EC362D;
     box-sizing: border-box;
     border-radius: 50px;
+    margin-bottom: 30px;
     
     color: #EC362D;
-    font-family: 'Roboto';
+    font-family: Roboto;
     font-style: normal;
     font-weight: 400;
     font-size: 21px;
@@ -154,13 +167,11 @@ body{
     width: 210px;
     height: 110px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
-
 .user-list span {
-    font-family: 'Roboto';
+    font-family: Roboto;
     font-style: normal;
     font-weight: 400;
     font-size: 20px;
@@ -186,15 +197,13 @@ body{
     width: 1080px;
     gap: 30px;
 }
-.list-quizz-server{
-    margin-bottom: 1px;
-}
+
 .content {
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 1080px;
-    padding-bottom: 200px;
+    padding-bottom: 100px;
 }
 
 .content h3{
@@ -213,11 +222,6 @@ body{
     gap: 30px;
 }
 
-img {
-    position: relative;
-    border-radius: 5px;
-    z-index: -1;
-}
 
 .quizz-server {
     position: relative;
@@ -231,19 +235,24 @@ img {
     left: 18px;
     width: 300px;
     height: 54px;
-      
-    font-family: 'Roboto';
+    
+    font-family: Roboto;
     font-style: normal;
     font-weight: normal;
     font-size: 19px;
     line-height: 22px;
     display: flex;
     align-items: center;
-
+    
     color: #FFFFFF;
 }
 
-.layer{
+img {
+    position: relative;
+    border-radius: 5px;
+    z-index: -1;
+}
+.layer .hide{
     width: 100%;
     height: 100%;
     background-image: linear-gradient(
@@ -834,4 +843,3 @@ img {
     font-size: 19px;
     word-break: break-all;
 }
-  

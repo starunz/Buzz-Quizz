@@ -1,46 +1,61 @@
-const loading = document.querySelector(".loading");
-const header = document.querySelector(".top");
-//const allScreen = document.querySelector(".container");
+const url = 'https://mock-api.driven.com.br/api/v4/buzzquizz';
+const container = document.querySelector('.container');
 
-function sucess(response){
-    const quizzes = response.data;
-    const ulQuizzes = document.querySelector(".list-quizz-server");
-    ulQuizzes.innerHTML = '';
-    
-    
-    for (let i = 0; i < quizzes.length; i++){
-           
-        ulQuizzes.innerHTML += ` 
-        <li>
+function sucess(response) {
+  const quizzes = response.data;
+  const ulQuizzes = document.querySelector(".list-quizz-server");
+  const ulUserQuizz = document.querySelector(".user-quizz");
+  ulQuizzes.innerHTML = "";
+  ulUserQuizz.innerHTML = "";
+
+  const userQuizzStorage = catchQuizzesLocalStorage();
+  for (let i = 0; i < quizzes.length; i++) {
+    userQuizzStorage.forEach((userQuizz) => {
+      if (quizzes[i].id === userQuizz.id) {
+        ulUserQuizz.innerHTML += ` <li class="user-list"> 
             <div class="quizz-server" onclick="showScreenTwo(${quizzes[i].id})" >
-        
-                <strong class="quizz-title">${quizzes[i].title}</strong>
-                <div class="quizz-question">
-                    <div class="layer">
-                        <img class="img" src="${quizzes[i].image}" width="340" height="181">     
-                    </div>
+            <strong class="quizz-title">${quizzes[i].title}</strong>
+            <div class="quizz-question">
+                <div class="layer">
+                    <img class="img" src="${quizzes[i].image}" width="340" height="181">     
                 </div>
             </div>
-        </li>`
-    }
-
+        </div>
+            </li>`;
+            showUserQuizz ()
+      } else {
+        ulQuizzes.innerHTML += ` 
+            <li>
+                <div class="quizz-server" onclick="showScreenTwo(${quizzes[i].id})" >
+            
+                    <strong class="quizz-title">${quizzes[i].title}</strong>
+                    <div class="quizz-question">
+                        <div class="layer">
+                            <img class="img" src="${quizzes[i].image}" width="340" height="181">     
+                        </div>
+                    </div>
+                </div>
+            </li>`;
+      } 
+    });
+  }
 }
-const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
-promise.then(sucess);
+const promess = axios.get(`${url}/quizzes`);
+promess.then(sucess);
 
 
 function showScreenTwo(quizzId){
-const screenOne = document.querySelector(".tela-01");
-screenOne.classList.add("hide");
+    const screenOne = document.querySelector(".tela-01");
+    screenOne.classList.add("hide");
 
-callScreen2(quizzId)
+    callScreen2(quizzId)
 }
 
-
-const URL = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da url é sempre a mesma o que muda é a rota.
-const container = document.querySelector('.container'); //para facilitar a vida, a gente pode usar 1 unica main para todas telas
-//já que vamos criar dinâmicamente, economiza css, html e tempo de ficar procurando :v mas cuidado nos fechamentos das divs :v
+function showUserQuizz (){
+    const showUser = document.querySelector(".noneStorage");
+    showUser.classList.add('hide');
+}
 
 // ------ tela 02 ------ 
 
@@ -51,7 +66,7 @@ let data;
 let scren2;
 
 function callScreen2(idQuizz){
-    const promise = axios.get(URL+"/quizzes/"+idQuizz);
+    const promise = axios.get(`${url}/quizzes/${idQuizz}`);
     promise.then(loadQuizz);
 }
 
@@ -219,7 +234,7 @@ function validateOfBasicQuizzInfo() {
         return false;
     } 
     else if (!checkUrl(quizzInfo.image)) {
-        alert('Insira uma Url válida 🙂');
+        alert('Insira uma url válida 🙂');
         return false;
     } 
     else if (quizzInfo.numberQuestions < 3 || isNaN(quizzInfo.numberQuestions)) {
@@ -266,30 +281,23 @@ function createCardQuizzQuestions(index) {
                     <ion-icon name="create-outline"></ion-icon>
                 </div>
             </div>
-
             <div class="questions">
                 <input type="text" class="answer-${index}-text" placeholder="Texto da pergunta" />
                 <input type="text" class="answer-${index}-color" placeholder="Cor de fundo da pergunta" />
-
                 <div class="subtitle">Resposta correta</div>
-
                 <div class="answers">
                     <input type="text" class="answer-correct-${index}" placeholder="Resposta correta" />
                     <input type="text" class="answer-correct-url-${index}" placeholder="URL da imagem" />
                 </div>
-
                 <div class="subtitle">Respostas incorretas</div>
-
                 <div class="answers answer-${index}-incorrect-0">
                     <input type="text" class="answer" placeholder="Resposta incorreta 1" />
                     <input type="text" class="url" placeholder="URL da imagem 1" />
                 </div>
-
                 <div class="answers answer-${index}-incorrect-1">
                     <input type="text" class="answer" placeholder="Resposta incorreta 2" />
                     <input type="text" class="url" placeholder="URL da imagem 2" />
                 </div>
-
                 <div class="answers answer-${index}-incorrect-2">
                     <input type="text" class="answer" placeholder="Resposta incorreta 3" />
                     <input type="text" class="url" placeholder="URL da imagem 3" />
@@ -364,7 +372,7 @@ function validateOfCreateQuizzQuestions() {
           return false;
         } 
         else if (!checkUrl(answer.image)) {
-            alert('Insira uma Url válida 🙂');
+            alert('Insira uma url válida 🙂');
           return false;
         }
       }
@@ -407,7 +415,6 @@ function createCardQuizzLevels(index) {
                 <ion-icon name="create-outline"></ion-icon>
             </div>
         </div>
-
         <div class="questions">
             <input type="text" class="level-${index}-title" placeholder="Título do nível" />
             <input type="number" class="level-${index}-success" placeholder="% de acerto mínima" />
@@ -453,7 +460,7 @@ function validateOfCreateQuizzLevels(){
         return false;
       }
       else if (!checkUrl(level.image)) {
-        alert('Insira uma Url válida 🙂');
+        alert('Insira uma url válida 🙂');
         return false;
       } 
       else if (level.text.length < 30) {
@@ -477,7 +484,7 @@ function finishedQuizz() {
     postFinishedQuizz();
 }
 
-function postFinishedQuizz() { 
+function postFinishedQuizz() {
     const info = {
         title: quizzInfo.title,
         image: quizzInfo.image,
@@ -485,11 +492,11 @@ function postFinishedQuizz() {
         levels: quizzInfo.levels
     };
     
-    const promise = axios.post(`${Url}/quizzes`, info);
+    const promise = axios.post(`${url}/quizzes`, info);
     promise.then(saveQuizzLocalStorage);
 }
 
-function saveQuizzLocalStorage (response) { 
+function saveQuizzLocalStorage (response) {
     const quizz = response.data;
     const dataLocal = catchQuizzesLocalStorage();
   
@@ -503,7 +510,7 @@ function saveQuizzLocalStorage (response) {
     createQuizzSuccess(quizz.id);
 }
 
-function catchQuizzesLocalStorage () {  
+function catchQuizzesLocalStorage () {
     let data = localStorage.getItem('quizz');
   
     if(data !== null) {
@@ -518,13 +525,11 @@ function createQuizzSuccess (id) {
     container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Seu quizz está pronto!</div>
-
         <div class="quizz" onclick="(${id})">
             <img src="${quizzInfo.image}">
             <div class="overlay"></div>
             <div class="title">${quizzInfo.title}</div>
         </div>
-
         <button class="next" onclick="(${id})">Acessar Quizz</button>
         <button class="next" onclick="">Voltar pra home</button>
     </div>
