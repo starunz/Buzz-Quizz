@@ -6,7 +6,6 @@
 }
 body{
     background-color: #D5D5D5;
-    padding: 0 70px;
 }
 .top {
     width: 100%;
@@ -81,6 +80,30 @@ body{
     justify-content: center;
     align-items: center;
 }
+.loading{
+    width: 100%;
+    height: 100%;
+    background-color: aquamarine;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    color: #EC362D;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 25px;
+    line-height: 29px;
+    text-align: center;
+}
+.gif{
+    z-index: 5;
+    margin: 0 auto;
+    width: 180px;
+    height: 180px;
+}
 .button{
     width: 151px;
     height: 40px;
@@ -132,6 +155,9 @@ body{
     width: 1080px;
     gap: 30px;
 }
+.list-quizz-server{
+    margin-bottom: 80px;
+}
 .content {
     display: flex;
     flex-direction: column;
@@ -152,7 +178,7 @@ body{
 }
 .server-list {
     gap: 30px;
-}
+    }
 img {
     position: relative;
     border-radius: 5px;

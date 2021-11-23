@@ -1,3 +1,6 @@
+const loading = document.querySelector(".loading");
+const header = document.querySelector(".top");
+const allScreen = document.querySelector(".container");
 
 function sucess(response){
     const quizzes = response.data;
@@ -20,9 +23,9 @@ function sucess(response){
             </li>`
         }
 }
-const promess = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
+const promise = axios.get("https://mock-api.driven.com.br/api/v4/buzzquizz/quizzes");
 
-promess.then(sucess);
+promise.then(sucess);
 
 
     function showScreenTwo(quizzId){
@@ -30,7 +33,9 @@ promess.then(sucess);
     screenOne.classList.add("hide");
 
     callScreen2(quizzId)
-    }
+}
+
+
 
 
 const URL = 'https://mock-api.driven.com.br/api/v4/buzzquizz'; //essa parte da url é sempre a mesma o que muda é a rota.
