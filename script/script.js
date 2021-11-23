@@ -531,13 +531,13 @@ function createQuizzSuccess (id) {
     container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Seu quizz está pronto!</div>
-        <div class="quizz" onclick="(${id})">
+        <div class="quizz quizz-sucess" onclick="(${id})">
             <img src="${quizzInfo.image}">
             <div class="overlay"></div>
             <div class="title-sucess">${quizzInfo.title}</div>
         </div>
-        <button class="next" onclick="callScreen2(${id})">Acessar Quizz</button>
-        <div class="home" onclick="home()">Voltar pra home</div>
+        <button class="next-quizz" onclick="callScreen2(${id})">Acessar Quizz</button>
+        <div class="next-home" onclick="home()">Voltar pra home</div>
     </div>
     `;
 }//chamar a função da tela 2 e tela 1 

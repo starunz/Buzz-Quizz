@@ -863,7 +863,7 @@ img {
     font-size: 21px;
 
     align-self: center;
-    margin-top: 30px;
+    margin-top: 35px;
 
     border: none;
     cursor: pointer;
@@ -879,19 +879,19 @@ img {
 }
 
 .next-home {
-    width: 310px;
+    width: 324px;
     height: 44px;
 
-    background: #ffffff;
     color: #818181;
     border-radius: 15px;
 
     font-size: 21px;
 
     align-self: center;
-    /*margin: 10px;*/
+    margin: 10px;
 
-    border: none;
+    text-align: center;
+
     cursor: pointer;
 }
 
@@ -907,4 +907,12 @@ img {
     transform: scale(0.90);
     transition: 1s;
 }
-  
+
+@media (max-width: 600px){
+    .create-quiz .quizz.quizz-sucess {
+        width: 100%;
+    }
+    .next-quizz .next-home {
+        width: 220px;
+    }
+}
