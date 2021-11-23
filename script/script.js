@@ -534,7 +534,7 @@ function createQuizzSuccess (id) {
         <div class="quizz" onclick="(${id})">
             <img src="${quizzInfo.image}">
             <div class="overlay"></div>
-            <div class="title">${quizzInfo.title}</div>
+            <div class="title-sucess">${quizzInfo.title}</div>
         </div>
         <button class="next" onclick="callScreen2(${id})">Acessar Quizz</button>
         <div class="home" onclick="home()">Voltar pra home</div>

@@ -1,5 +1,5 @@
 /* ------ Tela 01 ------ */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 *{
     box-sizing: border-box;
@@ -701,7 +701,6 @@ img {
 
 .creating input:not(:last-child) {
     margin-bottom: 0;
-    /*não tem margin-bottom só o último*/
 }
 
 .creating input::placeholder {
@@ -740,9 +739,17 @@ img {
     transition: 1s;
 }
 
-.create-quiz .container-questions.creating {
+.create-quiz .container-questions.creating, 
+.create-quiz .container-level {
     padding: 5px 15px;
     margin: 10px 0;
+}
+
+.create-quiz .container-level input:last-child {
+    height: 177px;
+    border: 1px solid #D1D1D1;
+    border-radius: 5px;
+    padding-bottom: 135px;
 }
 
 .create-quiz .title-card-question {
@@ -816,7 +823,7 @@ img {
     );
 }
 
-.create-quiz.quizz .title {
+.create-quiz.quizz {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -825,3 +832,79 @@ img {
     font-size: 19px;
     word-break: break-all;
 }
+
+.create-quiz .quizz.quizz-sucess {
+    width: 500px;
+    height: 266px;
+    margin: 0 auto;
+}
+
+.create-quiz .quizz .title-sucess {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 23px;
+    line-height: 27px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    font-family: 'Roboto';
+    color: #FFFFFF;
+}
+
+.next-quizz {
+    width: 324px;
+    height: 44px;
+
+    background: #EC362D;
+    color: #FFF5F4;
+    border-radius: 15px;
+
+    font-size: 21px;
+
+    align-self: center;
+    margin-top: 30px;
+
+    border: none;
+    cursor: pointer;
+}
+
+.next-quizz:hover {
+    filter: brightness(0.9);
+}
+
+.next-quizz:active {
+    transform: scale(0.90);
+    transition: 1s;
+}
+
+.next-home {
+    width: 310px;
+    height: 44px;
+
+    background: #ffffff;
+    color: #818181;
+    border-radius: 15px;
+
+    font-size: 21px;
+
+    align-self: center;
+    /*margin: 10px;*/
+
+    border: none;
+    cursor: pointer;
+}
+
+.next-home::placeholder{
+    color: #818181;
+}
+
+.next-home:hover {
+    filter: brightness(0.9);
+}
+
+.next-home:active {
+    transform: scale(0.90);
+    transition: 1s;
+}
+  
