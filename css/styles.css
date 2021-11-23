@@ -110,7 +110,8 @@
     border: 1px dashed #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
-    
+
+    margin: 77px 0 auto;
     width: 1051px;
     height: 100%;
 
@@ -391,14 +392,13 @@ img {
     line-height: 25px;
     letter-spacing: 0em;
     text-align: center;
-    color: #FFF5F4;
+    color: #818181;
 
     height: 52px;
     width: 260px;
     margin-bottom: 85px;
-    background-color: #EC362D;
-    border-radius: 15px;
     border: none;
+    background-color: none;
 }
 
 .titleEndQuiz{
@@ -656,22 +656,7 @@ img {
     
     }
 
-    .home{
-        font-family: 'Roboto';
-        font-size: 18px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 21px;
-        letter-spacing: 0em;
-        text-align: center;
-    
-        color: #818181;
-    
-        height: 44px;
-        width: 220px;
-        margin-bottom: 85px;
-    }
-}
+
     
 /* ------ Tela 03 ------ */
 .create-quiz {
