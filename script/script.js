@@ -531,7 +531,7 @@ function createQuizzSuccess (id) {
     container.innerHTML = `
     <div class="create-quiz">
         <div class="title">Seu quizz está pronto!</div>
-        <div class="quizz quizz-sucess" onclick="(${id})">
+        <div class="quizz quizz-sucess" onclick="callScreen2(${id})">
             <img src="${quizzInfo.image}">
             <div class="overlay"></div>
             <div class="title-sucess">${quizzInfo.title}</div>
